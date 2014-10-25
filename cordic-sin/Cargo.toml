@@ -1,0 +1,5 @@
+[package]
+
+name = "cordic-sin"
+version = "0.0.1"
+authors = ["Victory"]
