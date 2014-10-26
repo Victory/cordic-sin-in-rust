@@ -14,7 +14,7 @@ fn generate_table () {
     for ii in range(0, num_bits) {
         let ipow: f32 = 1.0/shift.powi(ii as i32);
         let cur: f32 = ipow.atan();
-        println!("table values {}", cur);
+        println!("table values {:.31f}", cur);
     }
 }
 
