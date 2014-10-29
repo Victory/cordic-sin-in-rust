@@ -35,7 +35,18 @@ fn generate_table () {
 fn sin(theta: f64) {
 
     let num_bits: uint = 32;
+
+    let k1: f64 = 0.6072529350088812561694; // 1/k
+    let mul: uint = 1<<(num_bits-2);
+    let mut x: f64 = (mul as f64) * k1;
+    let mut y: f64 = 0.0;
+    let mut z: f64 = theta;
+    
+
+
     let mut d: int;
+
+    
     let z: int = theta as int;
     let cordic_tab = [
         843314856.53262615f64, 497837829.38176435, 263043836.58692065, 133525158.66814968, 
@@ -53,6 +64,14 @@ fn sin(theta: f64) {
         } else {
             d = -1;
         }
+
+        /*
+        tx = x - (((y>>k) ^ d) - d);
+        ty = y + (((x>>k) ^ d) - d);
+        tz = z - ((cordic_ctab[k] ^ d) - d);
+        x = tx; y = ty; z = tz;
+        */
+
         println!("{}", d);
     }
 
