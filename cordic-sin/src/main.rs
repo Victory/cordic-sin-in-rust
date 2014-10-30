@@ -19,13 +19,14 @@ fn generate_table () {
         let ipow: f64 = 1f64/shift.powi(ii as i32);
         let cur: f64 = ipow.atan() * (mul as f64);
 
+
         if ii % 4 == 0 && ii > 0 {
             println!("");
         }
         if ii == 0 {
-            print!("{:0.8f}f64, ", cur);
+            print!("0x{}, ", std::f64::to_str_hex(cur.floor()));
         } else {
-            print!("{:0.8f}, ", cur);
+            print!("0x{}, ", std::f64::to_str_hex(cur.floor()));
         }
     }
 
@@ -52,11 +53,11 @@ fn sin(theta: f64) {
 
     let num_bits: uint = 32;
 
-    let k1: f64 = 0.6072529350088812561694; // 1/k
-    let mul: uint = 1<<(num_bits-2);
-    let mut x: int = ((mul as f64) * k1) as int;
+    let k1: int = f64_to_int(0.6072529350088812561694); // 1/k
+    let mul: int = 1<<(num_bits-2);
+    let mut x: int = mul * k1;
     let mut y: int = 0;
-    let mut z: int = theta as int;
+    let mut z: int = f64_to_int(theta);
     let mut tx: int;
     let mut ty: int ;
     let mut tz: int;
@@ -66,15 +67,15 @@ fn sin(theta: f64) {
     println!("x {}", x);
 
     let cordic_tab = [
-        843314856.53262615f64, 497837829.38176435, 263043836.58692065, 133525158.66814968, 
-        67021686.89696868, 33543515.72887244, 16775850.86663180, 8388437.33958306, 
-        4194282.66686198, 2097149.33333944, 1048575.66666686, 524287.95833334, 
-        262143.99479167, 131071.99934896, 65535.99991862, 32767.99998983, 
-        16383.99999873, 8191.99999984, 4095.99999998, 2048.00000000, 
-        1024.00000000, 512.00000000, 256.00000000, 128.00000000, 
-        64.00000000, 32.00000000, 16.00000000, 8.00000000, 
-        4.00000000, 2.00000000, 1.00000000, 0.50000000];
-
+        0x3243f6a8, 0x1dac6705, 0xfadbafc, 0x7f56ea6, 
+        0x3feab76, 0x1ffd55b, 0xfffaaa, 0x7fff55, 
+        0x3fffea, 0x1ffffd, 0xfffff, 0x7ffff, 
+        0x3ffff, 0x1ffff, 0xffff, 0x7fff, 
+        0x3fff, 0x1fff, 0xfff, 0x7ff, 
+        0x3ff, 0x1ff, 0xff, 0x7f, 
+        0x3f, 0x1f, 0xf, 0x8, 
+        0x4, 0x2, 0x1, 0x0, ];
+    
     for k in range(0, num_bits) {
         if z >= 0 {
             d = 0;
@@ -83,10 +84,13 @@ fn sin(theta: f64) {
         }
         tx = x - (((y>>k) ^ d) - d);
         ty = y + (((x>>k) ^ d) - d);
-        tz = z - (( (cordic_tab[k] as int) ^ d) - d);
+        tz = z - ((cordic_tab[k] ^ d) - d);
         x = tx; 
         y = ty; 
         z = tz;
+
+        println!("{}", k);
+        println!("{}", int_to_f64(tx));
     }
 }
 
