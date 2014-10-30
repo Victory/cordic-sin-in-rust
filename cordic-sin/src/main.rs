@@ -1,4 +1,6 @@
+
 fn generate_table () {
+
     let pi: f64 = 3.1415926536897932384626;
     let k1: f64 = 0.6072529350088812561694; // 1/k
     let num_bits: uint = 32;
@@ -33,6 +35,7 @@ fn generate_table () {
     println!("];");
 }
 
+
 fn int_to_f64 (lhs: int) -> f64 {
     let rhs: f64 = unsafe {
         std::mem::transmute(lhs)
@@ -53,19 +56,16 @@ fn sin(theta: f64) {
 
     let num_bits: uint = 32;
 
-    let k1: int = f64_to_int(0.6072529350088812561694); // 1/k
-    let mul: int = 1<<(num_bits-2);
-    let mut x: int = mul * k1;
+    //let k1: int = f64_to_int(0.6072529350088812561694); // 1/k
+    //let mul: int = 1<<(num_bits-2);
+    let mut x: int = 0x26DD3B6A; // todo derive this k1 and mul
     let mut y: int = 0;
-    let mut z: int = f64_to_int(theta);
+    let mut z: int = theta.floor() as int;
     let mut tx: int;
     let mut ty: int ;
     let mut tz: int;
 
     let mut d: int;
-
-    println!("x {}", x);
-
     let cordic_tab = [
         0x3243f6a8, 0x1dac6705, 0xfadbafc, 0x7f56ea6, 
         0x3feab76, 0x1ffd55b, 0xfffaaa, 0x7fff55, 
@@ -82,15 +82,14 @@ fn sin(theta: f64) {
         } else {
             d = -1;
         }
+
+        println!("z {}", z);
+
         tx = x - (((y>>k) ^ d) - d);
         ty = y + (((x>>k) ^ d) - d);
         tz = z - ((cordic_tab[k] ^ d) - d);
-        x = tx; 
-        y = ty; 
-        z = tz;
-
-        println!("{}", k);
-        println!("{}", int_to_f64(tx));
+        println!("{} {} {} {} {} {}", k, x, y, tx, ty, tz);
+        x = tx; y = ty; z = tz;
     }
 }
 
@@ -102,5 +101,7 @@ fn main() {
     assert!(f64_to_int(int_to_f64(i)) == i);
 
     generate_table();
-    sin(0.5);
+
+    let theta: f64 = 33732594.261305;
+    sin(theta);
 }
