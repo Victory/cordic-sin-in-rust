@@ -56,9 +56,13 @@ fn sin(theta: f64) {
 
     let num_bits: uint = 32;
 
-    //let k1: int = f64_to_int(0.6072529350088812561694); // 1/k
-    //let mul: int = 1<<(num_bits-2);
-    let mut x: int = 0x26DD3B6A; // todo derive this k1 and mul
+    let k1: f64 = 0.6072529350088812561694; // 1/k
+    let mul: int = 1<<(num_bits-2);
+    let cordic_k1: f64 = k1 * (mul as f64);
+    //println!("k1 - {}, mul - {}, cordic_k1 - {:X}", k1, mul, cordic_k1);
+
+    
+    let mut x: int = cordic_k1.floor() as int; //0x26DD3B6A; 
     let mut y: int = 0;
     let mut z: int = theta.floor() as int;
     let mut tx: int;
