@@ -52,22 +52,25 @@ fn f64_to_int (lhs: f64) -> int {
 }
 
 
-fn sin(theta: f64) {
+fn sin(theta: f64) -> f64 {
 
     let num_bits: uint = 32;
 
     let k1: f64 = 0.6072529350088812561694; // 1/k
-    let mul: int = 1<<(num_bits-2);
-    let cordic_k1: f64 = k1 * (mul as f64);
+    let muli: int = 1<<(num_bits-2);
+    let mul: f64 = muli as f64;
+
+    let cordic_k1: f64 = k1 * mul;
     //println!("k1 - {}, mul - {}, cordic_k1 - {:X}", k1, mul, cordic_k1);
 
-    
     let mut x: int = cordic_k1.floor() as int; //0x26DD3B6A; 
     let mut y: int = 0;
-    let mut z: int = theta.floor() as int;
+    let mut z: int = (mul * theta).floor() as int;
     let mut tx: int;
-    let mut ty: int ;
+    let mut ty: int;
     let mut tz: int;
+
+    //println!("z {}", z);
 
     let mut d: int;
     let cordic_tab = [
@@ -87,14 +90,19 @@ fn sin(theta: f64) {
             d = -1;
         }
 
-        println!("z {}", z);
+        //println!("z {}", z);
 
         tx = x - (((y>>k) ^ d) - d);
         ty = y + (((x>>k) ^ d) - d);
         tz = z - ((cordic_tab[k] ^ d) - d);
-        println!("{} {} {} {} {} {}", k, x, y, tx, ty, tz);
+        //println!("{} {} {} {} {} {}", k, x, y, tx, ty, tz);
         x = tx; y = ty; z = tz;
     }
+
+    let s: f64 = (y as f64)/(mul as f64);
+
+    return s;
+
 }
 
 
@@ -106,6 +114,22 @@ fn main() {
 
     generate_table();
 
-    let theta: f64 = 33732594.261305;
-    sin(theta);
+    //let theta: f64 = 33732594.261305;
+
+    let frac_pi_2: f64 = 3.1415926536897932384626/2.0;
+
+
+    for ii in range(0i, 50) {
+
+        let cur: f64 = ii as f64;
+
+        let theta: f64 = cur/50.0 * frac_pi_2;
+        let s: f64 = sin(theta);
+
+            println!("s {}", s);
+    }
+
+
+
+
 }
