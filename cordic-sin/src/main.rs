@@ -70,8 +70,7 @@ fn sin(theta: f64) -> f64 {
     let num_bits: uint = 32;
 
     let k1: f64 = 0.6072529350088812561694; // 1/k
-    let muli: int = 1<<(num_bits-2);
-    let mul: f64 = muli as f64;
+    let mul: f64 = (1i << (num_bits-2)) as f64;
     let cordic_k1: f64 = k1 * mul;
     let mut x: int = cordic_k1.floor() as int; //0x26DD3B6A; 
     let mut y: int = 0;
