@@ -1,4 +1,30 @@
 
+fn taylor_atan (x: f64) -> f64 {
+    //let x: f64 = 0.3;
+    let mut a: f64 = 0.0;
+    let mut s: f64 = 1.0;
+    let mut xpow: f64;
+    
+    for ii in range(1i, 16) {
+        if ii % 2 == 0 {
+            continue;
+        }
+
+        xpow = 1.0;
+        for jj in range(0i, ii) {
+            xpow *= x;
+        }
+        
+        a += s * xpow / (ii as f64);
+        
+        s = -1.0*s;
+    }
+    
+    println!("{}", a);
+    return a;
+}
+
+
 fn generate_table () {
 
     let pi: f64 = 3.1415926536897932384626;
