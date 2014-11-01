@@ -54,23 +54,6 @@ fn generate_table () {
     println!("];");
 }
 
-
-fn int_to_f64 (lhs: int) -> f64 {
-    let rhs: f64 = unsafe {
-        std::mem::transmute(lhs)
-    };
-    return rhs;
-}
-
-
-fn f64_to_int (lhs: f64) -> int {
-    let rhs: int = unsafe {
-        std::mem::transmute(lhs)
-    };
-    return rhs;
-}
-
-
 fn sin(theta: f64) -> f64 {
 
     let num_bits: uint = 32;
@@ -120,9 +103,6 @@ fn sin(theta: f64) -> f64 {
 fn main() {
     let i: int = 42882;
     let f: f64 = 3498043.4824;
-    assert!(int_to_f64(f64_to_int(f)) == f);
-    assert!(f64_to_int(int_to_f64(i)) == i);
-
     generate_table();
 
     let frac_pi_2: f64 = std::f64::consts::FRAC_PI_2; //3.1415926536897932384626/2.0;
