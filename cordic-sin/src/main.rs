@@ -86,8 +86,6 @@ fn sin(theta: f64) -> f64 {
     let mut ty: int;
     let mut tz: int;
 
-    //println!("z {}", z);
-
     let mut d: int;
     let cordic_tab = [
         0x3243f6a8, 0x1dac6705, 0xfadbafc, 0x7f56ea6, 
