@@ -14,8 +14,7 @@ fn taylor_atan (x: f64) -> f64 {
         a += s * xpow / (ii as f64);
         s = -1.0*s;
     }
-    
-    //println!("{}", a);
+
     return a;
 }
 
