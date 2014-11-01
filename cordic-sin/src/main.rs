@@ -1,6 +1,4 @@
-
 fn taylor_atan (x: f64) -> f64 {
-    //let x: f64 = 0.3;
     let mut a: f64 = 0.0;
     let mut s: f64 = 1.0;
     let mut xpow: f64;
@@ -9,14 +7,11 @@ fn taylor_atan (x: f64) -> f64 {
         if ii % 2 == 0 {
             continue;
         }
-
         xpow = 1.0;
         for jj in range(0i, ii) {
             xpow *= x;
         }
-        
         a += s * xpow / (ii as f64);
-        
         s = -1.0*s;
     }
     
@@ -24,13 +19,11 @@ fn taylor_atan (x: f64) -> f64 {
     return a;
 }
 
-
 fn generate_table () {
 
     let pi: f64 = 3.1415926536897932384626;
     let k1: f64 = 0.6072529350088812561694; // 1/k
     let num_bits: uint = 32;
-    //let num_elms: uint = num_bits;
     let mul: uint = 1<<(num_bits-2);
 
     println!("Cordic sin in rust");
@@ -85,10 +78,7 @@ fn sin(theta: f64) -> f64 {
     let k1: f64 = 0.6072529350088812561694; // 1/k
     let muli: int = 1<<(num_bits-2);
     let mul: f64 = muli as f64;
-
     let cordic_k1: f64 = k1 * mul;
-    //println!("k1 - {}, mul - {}, cordic_k1 - {:X}", k1, mul, cordic_k1);
-
     let mut x: int = cordic_k1.floor() as int; //0x26DD3B6A; 
     let mut y: int = 0;
     let mut z: int = (mul * theta).floor() as int;
@@ -116,12 +106,9 @@ fn sin(theta: f64) -> f64 {
             d = -1;
         }
 
-        //println!("z {}", z);
-
         tx = x - (((y>>k) ^ d) - d);
         ty = y + (((x>>k) ^ d) - d);
         tz = z - ((cordic_tab[k] ^ d) - d);
-        //println!("{} {} {} {} {} {}", k, x, y, tx, ty, tz);
         x = tx; y = ty; z = tz;
     }
 
@@ -140,10 +127,7 @@ fn main() {
 
     generate_table();
 
-    //let theta: f64 = 33732594.261305;
-
     let frac_pi_2: f64 = std::f64::consts::FRAC_PI_2; //3.1415926536897932384626/2.0;
-
 
     for ii in range(0i, 50) {
         let cur: f64 = ii as f64;
@@ -151,8 +135,4 @@ fn main() {
         let s: f64 = sin(theta);
             println!("s {}", s);
     }
-
-
-
-
 }
