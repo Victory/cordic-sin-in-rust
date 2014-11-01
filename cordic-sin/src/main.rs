@@ -1,8 +1,21 @@
+/**
+use the taylor series to caculate tan^-1 (x) where |x| < 1
+**/
 fn taylor_atan (x: f64) -> f64 {
     let mut a: f64 = 0.0;
     let mut s: f64 = 1.0;
     let mut xpow: f64;
-    
+
+    // by definition
+    if x == 0.0 {
+        return 0.0;
+    }
+
+    // this is well known, and the taylor series we are using explictly assumes |x| < 1
+    if x == 1.0 {
+        return std::f64::consts::PI/4.0;
+    }
+
     for ii in range(1i, 60) {
         if ii % 2 == 0 {
             continue;
@@ -69,21 +82,9 @@ fn sin(theta: f64) -> f64 {
     let mut tz: int;
 
     let mut d: int;
-
-    /* using builtin atan table
-    let cordic_tab = [
-        0x3243f6a8, 0x1dac6705, 0xfadbafc, 0x7f56ea6, 
-        0x3feab76, 0x1ffd55b, 0xfffaaa, 0x7fff55, 
-        0x3fffea, 0x1ffffd, 0xfffff, 0x7ffff, 
-        0x3ffff, 0x1ffff, 0xffff, 0x7fff, 
-        0x3fff, 0x1fff, 0xfff, 0x7ff, 
-        0x3ff, 0x1ff, 0xff, 0x7f, 
-        0x3f, 0x1f, 0xf, 0x8, 
-        0x4, 0x2, 0x1, 0x0, ];
-    */
     
     let cordic_tab = [
-        0x31bb77d2, 0x1dac6705, 0xfadbafc, 0x7f56ea6, 
+        0x3243f6a8, 0x1dac6705, 0xfadbafc, 0x7f56ea6, 
         0x3feab76, 0x1ffd55b, 0xfffaaa, 0x7fff55, 
         0x3fffea, 0x1ffffd, 0xfffff, 0x7ffff, 
         0x3ffff, 0x1ffff, 0xffff, 0x7fff, 
