@@ -142,16 +142,13 @@ fn main() {
 
     //let theta: f64 = 33732594.261305;
 
-    let frac_pi_2: f64 = 3.1415926536897932384626/2.0;
+    let frac_pi_2: f64 = std::f64::consts::FRAC_PI_2; //3.1415926536897932384626/2.0;
 
 
     for ii in range(0i, 50) {
-
         let cur: f64 = ii as f64;
-
         let theta: f64 = cur/50.0 * frac_pi_2;
         let s: f64 = sin(theta);
-
             println!("s {}", s);
     }
 
