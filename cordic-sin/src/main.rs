@@ -40,7 +40,6 @@ fn generate_table () {
         let ipow: f64 = 1f64/shift.powi(ii as i32);
         let cur: f64 = ipow.atan() * (mul as f64);
 
-
         if ii % 4 == 0 && ii > 0 {
             println!("");
         }
@@ -101,8 +100,6 @@ fn sin(theta: f64) -> f64 {
 
 
 fn main() {
-    let i: int = 42882;
-    let f: f64 = 3498043.4824;
     generate_table();
 
     let frac_pi_2: f64 = std::f64::consts::FRAC_PI_2; //3.1415926536897932384626/2.0;
