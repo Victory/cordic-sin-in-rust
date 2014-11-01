@@ -1,5 +1,5 @@
 /**
-use the taylor series to caculate tan^-1 (x) where |x| < 1
+use the taylor series to caculate tan^-1 (x) where |x| <= 1, x >= 0
 **/
 fn taylor_atan (x: f64) -> f64 {
     let mut a: f64 = 0.0;
