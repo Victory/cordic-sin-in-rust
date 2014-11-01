@@ -3,7 +3,7 @@ fn taylor_atan (x: f64) -> f64 {
     let mut s: f64 = 1.0;
     let mut xpow: f64;
     
-    for ii in range(1i, 16) {
+    for ii in range(1i, 60) {
         if ii % 2 == 0 {
             continue;
         }
@@ -15,7 +15,7 @@ fn taylor_atan (x: f64) -> f64 {
         s = -1.0*s;
     }
     
-    println!("{}", a);
+    //println!("{}", a);
     return a;
 }
 
@@ -38,7 +38,8 @@ fn generate_table () {
     let shift: f64 = 2.0;
     for ii in range(0, num_bits) {
         let ipow: f64 = 1f64/shift.powi(ii as i32);
-        let cur: f64 = ipow.atan() * (mul as f64);
+        //let cur: f64 = ipow.atan() * (mul as f64);
+        let cur: f64 = taylor_atan(ipow) * (mul as f64);
 
         if ii % 4 == 0 && ii > 0 {
             println!("");
