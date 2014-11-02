@@ -21,7 +21,7 @@ fn taylor_atan (x: f64) -> f64 {
             continue;
         }
         xpow = 1.0;
-        for jj in range(0i, ii) {
+        for _ in range(0i, ii) {
             xpow *= x;
         }
         a += s * xpow / (ii as f64);
