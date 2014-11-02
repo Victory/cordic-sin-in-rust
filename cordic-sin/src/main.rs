@@ -13,7 +13,7 @@ fn taylor_atan (x: f64) -> f64 {
 
     // this is well known, and the taylor series we are using explictly assumes |x| < 1
     if x == 1.0 {
-        return std::f64::consts::PI/4.0;
+        return std::f64::consts::FRAC_PI_4;
     }
 
     for ii in range(1i, 60) {
