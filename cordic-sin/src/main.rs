@@ -33,7 +33,7 @@ fn taylor_atan (x: f64) -> f64 {
 
 fn generate_table () {
 
-    let pi: f64 = 3.1415926536897932384626;
+    let pi: f64 = std::f64::consts::PI;
     let k1: f64 = 0.6072529350088812561694; // 1/k
     let num_bits: uint = 32;
     let mul: uint = 1<<(num_bits-2);
@@ -121,6 +121,6 @@ fn main() {
         let cur: f64 = ii as f64;
         let theta: f64 = cur/50.0 * frac_pi_2;
         let s: f64 = sin(theta);
-            println!("s {}", s);
+            println!("sin({}) ~= {}", theta, s);
     }
 }
