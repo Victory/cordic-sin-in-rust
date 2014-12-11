@@ -13,3 +13,11 @@ pub fn add (a: u8, b: u8) -> u8 {
     return i | c;
 }
 
+
+pub fn subtract (a: u8, b: u8) -> u8 {
+
+    let mut i: u8 = 0;
+    let mut c: u8 = 0;
+
+    return i;
+}

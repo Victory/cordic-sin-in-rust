@@ -7,8 +7,13 @@ pub mod algebra;
 fn test_adding () {
     let a = 3u8;
     let b = 6u8;
-    let expected = a + b;
-
     assert!(a + b == algebra::add(a, b));
+}
 
+
+#[test]
+fn test_subtracting () {
+    let a = 9u8;
+    let b = 3u8;
+    assert!(a - b == algebra::subtract(a, b));
 }
