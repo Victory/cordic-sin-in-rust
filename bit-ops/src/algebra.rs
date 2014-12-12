@@ -15,9 +15,6 @@ pub fn add (a: u8, b: u8) -> u8 {
 
 
 pub fn subtract (a: u8, b: u8) -> u8 {
-
-    let mut i: u8 = 0;
-    let mut c: u8 = 0;
-
-    return i;
+    let not_b_plus_1 = add(!b, 1u8);
+    return add(a, not_b_plus_1);
 }

@@ -7,7 +7,8 @@ fn main () {
     let b = 6u8;
     println!("{:0>8b} + {:0>8b} = {:0>8b}", a, b, add(a, b));
 
-    let a = 9u8;
-    let b = 6u8;
+    let a = 8u8;
+    let b = 4u8;
     println!("{:0>8b} - {:0>8b} = {:0>8b}", a, b, subtract(a, b));
+    println!("{} - {} = {}", a, b, subtract(a, b));
 }
