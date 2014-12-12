@@ -5,22 +5,25 @@ pub mod algebra;
 
 #[test]
 fn test_adding () {
-    let a = 3u8;
-    let b = 6u8;
+    let a = 3i8;
+    let b = 6i8;
     assert!(a + b == algebra::add(a, b));
 }
 
 
 #[test]
 fn test_subtracting () {
-    let a = 9u8;
-    let b = 3u8;
-    assert!(a - b == algebra::subtract(a, b));
+    let a = 9i8;
+    let b = 3i8;
 
-    let minuend = 8;
+    let result = a - b == algebra::subtract(a, b);
+    assert!(result);
 
-    for subtrahend in range(0u8, 128) {
-        assert!(minuend - subtrahend == algebra::subtract(minuend, subtrahend));
+    let minuend = 8i8;
+
+    for subtrahend in range(0i8, 128) {
+        let result = minuend - subtrahend == algebra::subtract(minuend, subtrahend);
+        assert!(result);
     }
 
 }
