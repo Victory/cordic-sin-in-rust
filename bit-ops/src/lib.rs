@@ -16,4 +16,11 @@ fn test_subtracting () {
     let a = 9u8;
     let b = 3u8;
     assert!(a - b == algebra::subtract(a, b));
+
+    let minuend = 8;
+
+    for subtrahend in range(0u8, 128) {
+        assert!(minuend - subtrahend == algebra::subtract(minuend, subtrahend));
+    }
+
 }
