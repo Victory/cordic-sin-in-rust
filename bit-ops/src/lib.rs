@@ -19,11 +19,11 @@ fn test_subtracting () {
     let result = a - b == algebra::subtract(a, b);
     assert!(result);
 
-    let minuend = 8i8;
-
-    for subtrahend in range(0i8, 128) {
-        let result = minuend - subtrahend == algebra::subtract(minuend, subtrahend);
-        assert!(result);
+    for minuend in range(0i8, 128) {
+        for subtrahend in range(0i8, 128) {
+            let result = minuend - subtrahend == algebra::subtract(minuend, subtrahend);
+            assert!(result);
+        }
     }
 
 }
