@@ -27,3 +27,13 @@ fn test_subtracting () {
     }
 
 }
+
+
+#[test]
+fn test_abs_gt () {
+     for a in range(0u8, 20u8) {
+        for b in range (10u8, 20u8) {
+            assert!(a > b == algebra::gt(a, b));
+        }
+    }
+}

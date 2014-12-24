@@ -18,3 +18,16 @@ pub fn subtract (a: i8, b: i8) -> i8 {
     let not_b_plus_1 = add(!b, 1i8);
     return add(a, not_b_plus_1);
 }
+
+// return a > b
+pub fn gt(a: u8, b: u8) -> bool {
+
+    let mut ltb = (!a & b) as u8;
+    let mut gtb = (a & !b) as u8;
+
+    ltb = ltb | (ltb >> 1);
+    ltb = ltb | (ltb >> 2);
+    ltb = ltb | (ltb >> 4);
+
+    return (gtb & !ltb) != 0;
+}
