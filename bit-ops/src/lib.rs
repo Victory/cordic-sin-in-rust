@@ -30,10 +30,19 @@ fn test_subtracting () {
 
 
 #[test]
-fn test_abs_gt () {
+fn test_gt () {
      for a in range(-10i8, 20i8) {
         for b in range (-10i8, 20i8) {
-            assert!(a > b == algebra::gt(a, b), format!("{} < {} == a < b", a, b));
+            assert!(a > b == algebra::gt(a, b), format!("{} > {} == a > b", a, b));
+        }
+    }
+}
+
+#[test]
+fn test_lt () {
+     for a in range(-10i8, 20i8) {
+        for b in range (-10i8, 20i8) {
+            assert!(a < b == algebra::lt(a, b), format!("{} < {} == {} ", a, b, a < b));
         }
     }
 }

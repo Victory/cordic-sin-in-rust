@@ -33,3 +33,8 @@ pub fn gt(a: i8, b: i8) -> bool {
 
     return (gtb & !ltb) != 0;
 }
+
+
+pub fn lt(a: i8, b: i8) -> bool {
+    return a != b && !gt(a, b);
+}
