@@ -21,6 +21,8 @@ pub fn subtract (a: i8, b: i8) -> i8 {
 
 // return a > b
 pub fn gt(a: i8, b: i8) -> bool {
+    let a = a ^ 0b1000_0000;
+    let b = b ^ 0b1000_0000;
 
     let mut ltb = (!a & b) as u8;
     let mut gtb = (a & !b) as u8;
