@@ -46,3 +46,18 @@ fn test_lt () {
         }
     }
 }
+
+
+#[test]
+fn test_hemming () {
+    use algebra::hemming;
+
+    let result = hemming(1i8);
+    assert!(result == 1i8);
+
+    let result = hemming(2i8);
+    assert!(result == 1i8);
+
+    let result = hemming(3i8);
+    assert!(result == 2i8);
+}

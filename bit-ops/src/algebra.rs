@@ -39,3 +39,15 @@ pub fn gt(a: i8, b: i8) -> bool {
 pub fn lt(a: i8, b: i8) -> bool {
     return a != b && !gt(a, b);
 }
+
+
+pub fn hemming(a: i8) -> i8 {
+    let m1 = 0b0101_0101;
+    let m2 = 0b0011_0011;
+    let m4 = 0b0000_1111;
+
+    let mut b = a;
+    b = (b & m1) + ((b >> 1) & m1);
+
+    return b;
+}
