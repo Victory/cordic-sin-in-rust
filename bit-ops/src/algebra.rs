@@ -48,6 +48,8 @@ pub fn hemming(a: i8) -> i8 {
 
     let mut b = a;
     b = (b & m1) + ((b >> 1) & m1);
+    b = (b & m2) + ((b >> 2) & m2);
+    b = (b & m4) + ((b >> 4) & m4);
 
     return b;
 }

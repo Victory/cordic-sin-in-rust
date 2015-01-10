@@ -60,4 +60,11 @@ fn test_hemming () {
 
     let result = hemming(3i8);
     assert!(result == 2i8);
+
+    let result = hemming(4i8);
+    assert!(result == 1i8);
+
+    let result = hemming(5i8);
+    assert!(result == 2i8);
+
 }
