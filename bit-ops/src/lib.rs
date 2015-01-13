@@ -75,4 +75,18 @@ fn test_hemming () {
 
     let result = hemming(0b0101_1101 as i8);
     assert!(result == 5i8);
+
+    let mut shifts = 0b0000_0001;
+    for _ in range(0u, 8u) {
+        let result = hemming(shifts as i8);
+        assert!(result == 1i8);
+        shifts = shifts << 1;
+    }
+
+    let mut shifts = 0b0000_0011;
+    for _ in range(0u, 7u) {
+        let result = hemming(shifts as i8);
+        assert!(result == 2i8);
+        shifts = shifts << 1;
+    }
 }
