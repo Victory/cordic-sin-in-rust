@@ -1,14 +1,27 @@
 extern crate core;
+
 use core::num::FromPrimitive;
-
-
+use core::fmt;
 
 #[derive(Copy)]
 #[derive(Show)]
 #[derive(FromPrimitive)]
 enum Direction {
     SpinUp = 0x1,
-    SpinDown = 0x2
+    SpinDown = 0x2,
+    SpinSuper = 0x3,
+}
+
+
+impl fmt::String for Direction {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let r = match self {
+            &Direction::SpinUp => "SpinUp",
+            &Direction::SpinDown => "SpinDown",
+            &Direction::SpinSuper => "SpinSuper"
+        };
+        write!(f, "{}", r)
+    }
 }
 
 
@@ -23,8 +36,8 @@ struct Particle {
 
 impl Particle {
     fn new_pair () -> Pair<Particle> {
-        let d1 = FromPrimitive::from_u8(0x1).expect("unknown direction");
-        let d2 = FromPrimitive::from_u8(0x2).expect("unknown direction");
+        let d1 = FromPrimitive::from_u8(0x3).expect("unknown direction");
+        let d2 = FromPrimitive::from_u8(0x3).expect("unknown direction");
         let p1 = Particle{spin: d1};
         let p2 = Particle{spin: d2};
 
@@ -33,4 +46,9 @@ impl Particle {
 }
 
 fn main () {
+
+    let particles = Particle::new_pair();
+
+
+    println!("lhs.spin {}", particles.lhs.spin);
 }
