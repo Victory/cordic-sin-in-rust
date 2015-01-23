@@ -5,11 +5,10 @@ use core::fmt;
 
 #[derive(Copy)]
 #[derive(Show)]
-#[derive(FromPrimitive)]
 enum Direction {
-    SpinUp = 0x1,
-    SpinDown = 0x2,
-    SpinSuper = 0x3,
+    SpinUp,
+    SpinDown,
+    SpinSuper,
 }
 
 
@@ -36,8 +35,8 @@ struct Particle {
 
 impl Particle {
     fn new_pair () -> Pair<Particle> {
-        let d1 = FromPrimitive::from_u8(0x3).expect("unknown direction");
-        let d2 = FromPrimitive::from_u8(0x3).expect("unknown direction");
+        let d1 = Direction::SpinSuper;
+        let d2 =  Direction::SpinSuper;
         let p1 = Particle{spin: d1};
         let p2 = Particle{spin: d2};
 
