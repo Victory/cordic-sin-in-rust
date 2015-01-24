@@ -3,6 +3,8 @@ extern crate core;
 use core::num::FromPrimitive;
 use core::fmt;
 
+use Direction::{SpinUp, SpinDown, SpinSuper};
+
 #[derive(Copy)]
 #[derive(Show)]
 enum Direction {
@@ -15,9 +17,9 @@ enum Direction {
 impl fmt::String for Direction {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let r = match self {
-            &Direction::SpinUp => "SpinUp",
-            &Direction::SpinDown => "SpinDown",
-            &Direction::SpinSuper => "SpinSuper"
+            &SpinUp => "SpinUp",
+            &SpinDown => "SpinDown",
+            &SpinSuper => "SpinSuper"
         };
         write!(f, "{}", r)
     }
@@ -35,8 +37,8 @@ struct Particle {
 
 impl Particle {
     fn new_pair () -> Pair<Particle> {
-        let d1 = Direction::SpinSuper;
-        let d2 =  Direction::SpinSuper;
+        let d1 = SpinSuper;
+        let d2 = SpinSuper;
         let p1 = Particle{spin: d1};
         let p2 = Particle{spin: d2};
 
