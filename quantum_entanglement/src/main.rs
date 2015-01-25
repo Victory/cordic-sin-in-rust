@@ -4,6 +4,7 @@ use core::num::FromPrimitive;
 use core::fmt;
 
 use Direction::{SpinUp, SpinDown, SpinSuper};
+use Plan::{Switch, OddBall};
 
 #[derive(Copy)]
 #[derive(Show)]
@@ -33,6 +34,11 @@ struct Particle {
     spin: Direction
 }
 
+enum Plan {
+    Switch, // up-up-up -> down-down-down
+    OddBall // 
+}
+
 impl Particle {
     fn new_pair () -> Pair<Particle> {
         let d1 = SpinSuper;
@@ -41,6 +47,12 @@ impl Particle {
         let p2 = Particle{spin: d2};
 
         return Pair{lhs: p1, rhs: p2};
+    }
+
+    pub fn measure (&mut self, theta: int) {
+        // TODO theta = 60degrees use 3/4th and 1/4th
+        // TODO theta = 0 SpinUp
+        // TODO theta = 180 SpinDown
     }
 
     // measure with with a message
@@ -60,9 +72,25 @@ impl Particle {
         };
         self.spin = spin;
 
-        return Pair{lhs:self.spin, rhs: friend.spin};
+        return Pair{lhs: self.spin, rhs: friend.spin};
+    }
+
+    pub fn premeditated (&mut self, friend: &mut Particle, theta: int, plan: Plan) -> Pair<Direction> {
+
+        // TODO: Use plan
+        friend.spin = SpinUp;
+        
+        let spin = match friend.spin {
+            SpinUp => SpinDown,
+            SpinDown => SpinUp,
+            _ => panic!("broke the universe")
+        };
+        self.spin = spin;
+
+        return Pair{lhs: self.spin, rhs: friend.spin};
     }
 }
+
 
 fn main () {
 
