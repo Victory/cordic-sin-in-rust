@@ -13,7 +13,6 @@ enum Direction {
     SpinSuper,
 }
 
-
 impl fmt::String for Direction {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         let r = match self {
@@ -24,7 +23,6 @@ impl fmt::String for Direction {
         write!(f, "{}", r)
     }
 }
-
 
 struct Pair<T> {
     lhs: T,
@@ -42,7 +40,27 @@ impl Particle {
         let p1 = Particle{spin: d1};
         let p2 = Particle{spin: d2};
 
-        return Pair{lhs:p1, rhs: p2};
+        return Pair{lhs: p1, rhs: p2};
+    }
+
+    // measure with with a message
+    pub fn spooky (&mut self, friend: &mut Particle) -> Pair<Direction> {
+
+        let spin = match self.spin {
+            SpinUp => SpinDown,
+            SpinDown => SpinUp,
+            SpinSuper => SpinUp
+        };
+        friend.spin = spin;
+
+        let spin = match friend.spin {
+            SpinUp => SpinDown,
+            SpinDown => SpinUp,
+            _ => panic!("broke the universe")
+        };
+        self.spin = spin;
+
+        return Pair{lhs:self.spin, rhs: friend.spin};
     }
 }
 
@@ -50,6 +68,10 @@ fn main () {
 
     let particles = Particle::new_pair();
 
+    let mut lhs = particles.lhs;
+    let mut rhs = particles.rhs;
 
-    println!("lhs.spin {}", particles.lhs.spin);
+    lhs.spooky(&mut rhs);
+
+    println!("lhs.spin {}, rhs.spin {}", lhs.spin, rhs.spin);
 }
