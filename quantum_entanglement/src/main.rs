@@ -39,6 +39,12 @@ enum Plan {
     OddBall // 
 }
 
+enum Detector {
+    D12, // 12 o'clock
+    D3, // 3 o'clock
+    D9, // 9 o' clock
+}
+
 impl Particle {
     fn new_pair () -> Pair<Particle> {
         let d1 = SpinSuper;
@@ -54,6 +60,9 @@ impl Particle {
         // TODO theta = 0 SpinUp
         // TODO theta = 180 SpinDown
     }
+
+    // NOTE on spooky and premeditated only if measured in the same
+    // direction must the spins be opposite
 
     // measure with with a message
     pub fn spooky (&mut self, friend: &mut Particle) -> Pair<Direction> {
@@ -102,4 +111,6 @@ fn main () {
     lhs.spooky(&mut rhs);
 
     println!("lhs.spin {}, rhs.spin {}", lhs.spin, rhs.spin);
+
+    // premeditated should give +55.6% difference, spooky would give 50%
 }
